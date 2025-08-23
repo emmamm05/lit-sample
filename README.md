@@ -1,24 +1,41 @@
-# README
+# Lit + esbuild setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Rails app is configured to use jsbundling-rails with esbuild and the Lit (lit.dev) web components framework.
 
-Things you may want to cover:
+## Install Node dependencies
 
-* Ruby version
+```sh
+npm install
+```
 
-* System dependencies
+## Build assets
 
-* Configuration
+One-off build:
 
-* Database creation
+```sh
+npm run build
+```
 
-* Database initialization
+Watch mode (during development):
 
-* How to run the test suite
+```sh
+npm run build:watch
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+If you use foreman/bin/dev with Procfile.dev, ensure the build script runs alongside Rails.
 
-* Deployment instructions
+## Using the example component
 
-* ...
+A sample Lit component is included at `app/javascript/components/hello-lit.js` and imported from the application entrypoint. You can use it in any view:
+
+```html
+<hello-lit name="Rails"></hello-lit>
+```
+
+The compiled bundle is emitted to `app/assets/builds`, and is included by the layout via:
+
+```erb
+<%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+```
+
+That means any component imported from `app/javascript/application.js` will be available on pages rendering the default layout.
