@@ -5,4 +5,4 @@
 <% else %>
   <p>You don't have backup codes yet. Generate a new set now.</p>
 <% end %>
-<%= button_to "Generate new backup codes", identity_backup_codes_path, method: :post %>
+<%= button_to "Generate new backup codes", identity_backup_codes_path, method: :post, data: { turbo: false } %>
