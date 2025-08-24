@@ -1,3 +1,4 @@
+<app-section>
 <h1>Two‑factor authentication required</h1>
 <p>Enter a code from your authenticator app or a backup code.</p>
 <%= form_with url: identity_two_factor_challenge_path do |f| %>
@@ -9,3 +10,5 @@
     <%= f.submit "Verify" %>
   </div>
 <% end %>
+
+</app-section>

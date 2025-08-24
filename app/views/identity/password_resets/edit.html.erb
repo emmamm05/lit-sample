@@ -1,3 +1,4 @@
+<app-section>
 <h1>Reset your password</h1>
 
 <%= form_with(url: identity_password_reset_path, method: :patch) do |form| %>
@@ -30,3 +31,5 @@
     <%= form.submit "Save changes" %>
   </div>
 <% end %>
+
+</app-section>

@@ -1,3 +1,4 @@
+<app-section>
 <h1>Backup codes</h1>
 <% if Current.user.otp_backup_codes.present? %>
   <p>You have <%= JSON.parse(Current.user.otp_backup_codes).size %> remaining backup codes.</p>
