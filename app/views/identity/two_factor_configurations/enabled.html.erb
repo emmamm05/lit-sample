@@ -1,0 +1,80 @@
+<h1>Two‑factor enabled</h1>
+<p>Save these backup codes in a safe place. Each code can be used once if you lose access to your authenticator.</p>
+
+<div id="backup-codes" data-download-filename="backup-codes.txt">
+  <ul>
+    <% @codes.each do |code| %>
+      <li><code><%= code %></code></li>
+    <% end %>
+  </ul>
+</div>
+
+<div style="margin-top: 1em;">
+  <button type="button" id="copy-codes">Copy to clipboard</button>
+  <button type="button" id="download-codes">Download</button>
+</div>
+
+<p style="margin-top: 1em;"><%= link_to "Done", root_path %></p>
+
+<script>
+  (function() {
+    function codesText() {
+      const container = document.getElementById('backup-codes');
+      if (!container) return '';
+      const items = Array.from(container.querySelectorAll('li'));
+      return items.map(li => li.textContent.trim()).join('\n');
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        return Promise.resolve();
+      }
+    }
+
+    function downloadText(filename, text) {
+      const blob = new Blob([text + '\n'], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename || 'backup-codes.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    const copyBtn = document.getElementById('copy-codes');
+    const downloadBtn = document.getElementById('download-codes');
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function() {
+        const text = codesText();
+        if (!text) return;
+        copyToClipboard(text).then(function(){
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = 'Copy to clipboard', 1500);
+        });
+      });
+    }
+
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function() {
+        const text = codesText();
+        if (!text) return;
+        const filename = document.getElementById('backup-codes').dataset.downloadFilename || 'backup-codes.txt';
+        downloadText(filename, text);
+      });
+    }
+  })();
+</script>

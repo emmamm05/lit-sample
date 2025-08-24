@@ -1,0 +1,8 @@
+<h1>Backup codes</h1>
+<% if Current.user.otp_backup_codes.present? %>
+  <p>You have <%= JSON.parse(Current.user.otp_backup_codes).size %> remaining backup codes.</p>
+  <p>You can regenerate a fresh set (this invalidates existing ones).</p>
+<% else %>
+  <p>You don't have backup codes yet. Generate a new set now.</p>
+<% end %>
+<%= button_to "Generate new backup codes", identity_backup_codes_path, method: :post %>

@@ -9,6 +9,11 @@ Rails.application.routes.draw do
     resource :email,              only: [:edit, :update]
     resource :email_verification, only: [:show, :create]
     resource :password_reset,     only: [:new, :edit, :create, :update]
+
+    # Two-factor configuration and challenge
+    resource :two_factor_configuration, only: [:new, :create, :destroy]
+    resource :two_factor_challenge,     only: [:new, :create]
+    resources :backup_codes,            only: [:index, :create]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

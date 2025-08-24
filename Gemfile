@@ -58,6 +58,11 @@ group :development do
   gem "web-console"
 end
 
+# TOTP for two-factor authentication
+gem "rotp"
+# QR code generation for TOTP provisioning
+gem "rqrcode"
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
