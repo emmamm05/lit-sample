@@ -54,9 +54,11 @@ group :development, :test do
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
+  # Use console on exceptions pages [https://github.com/rails/web-console
   gem "web-console"
 end
+
+gem "phlex-rails", "~> 2.3.1"
 
 # TOTP for two-factor authentication
 gem "rotp"

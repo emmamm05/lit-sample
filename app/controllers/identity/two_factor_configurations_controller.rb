@@ -6,6 +6,8 @@ class Identity::TwoFactorConfigurationsController < ApplicationController
       # Build provisioning URI for QR (otpauth://)
       @provisioning_uri = ROTP::TOTP.new(@user.otp_secret, issuer: Rails.application.class.module_parent_name).provisioning_uri(@user.email)
     end
+
+    render Identity::TwoFactorConfigurations::NewView.new(user: @user, provisioning_uri: @provisioning_uri)
   end
 
   def create
@@ -18,10 +20,10 @@ class Identity::TwoFactorConfigurationsController < ApplicationController
     if ROTP::TOTP.new(@user.otp_secret, issuer: Rails.application.class.module_parent_name).verify(code, drift_ahead: 30, drift_behind: 30)
       @user.update!(otp_enabled_at: Time.current)
       @codes = @user.generate_backup_codes!
-      render :enabled
+      render Identity::TwoFactorConfigurations::EnabledView.new(codes: @codes)
     else
       flash.now[:alert] = "Invalid code"
-      render :new, status: :unprocessable_entity
+      render Identity::TwoFactorConfigurations::NewView.new(user: @user, provisioning_uri: ROTP::TOTP.new(@user.otp_secret, issuer: Rails.application.class.module_parent_name).provisioning_uri(@user.email)), status: :unprocessable_entity
     end
   end
 
