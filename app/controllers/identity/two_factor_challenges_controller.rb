@@ -4,8 +4,6 @@ class Identity::TwoFactorChallengesController < ApplicationController
   def new
     @user = pre_two_fa_user
     redirect_to sign_in_path, alert: "Please sign in" and return unless @user
-
-    render Identity::TwoFactorChallenges::NewView.new
   end
 
   def create
@@ -20,7 +18,7 @@ class Identity::TwoFactorChallengesController < ApplicationController
       redirect_to root_path, notice: "Signed in successfully"
     else
       flash.now[:alert] = "Invalid authentication code"
-      render Identity::TwoFactorChallenges::NewView.new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

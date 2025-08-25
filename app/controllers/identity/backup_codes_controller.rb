@@ -6,6 +6,6 @@ class Identity::BackupCodesController < ApplicationController
   def create
     @user = Current.user
     @codes = @user.generate_backup_codes!
-    render Identity::BackupCodes::ShowView.new(codes: @codes)
+    render :show
   end
 end
