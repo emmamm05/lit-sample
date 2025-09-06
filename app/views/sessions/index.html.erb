@@ -1,37 +1,57 @@
-<app-section>
-<p style="color: green"><%= notice %></p>
+<style>
+  .home-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1rem;
+    align-items: start;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .welcome {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #fafafa;
+  }
+  .welcome h1 { margin-top: 0; }
+</style>
 
-<h1>Devices & Sessions</h1>
+<div class="home-layout">
+  <app-sidebar></app-sidebar>
 
-<div id="sessions">
-  <% @sessions.each do |session| %>
-    <div id="<%= dom_id session %>">
-      <p>
-        <strong>User Agent:</strong>
-        <%= session.user_agent %>
-      </p>
+  <div class="welcome">
+    <h1>Devices & Sessions</h1>
 
-      <p>
-        <strong>Ip Address:</strong>
-        <%= session.ip_address %>
-      </p>
+    <p style="color: green"><%= notice %></p>
 
-      <p>
-        <strong>Created at:</strong>
-        <%= session.created_at %>
-      </p>
+    <div id="sessions">
+      <% @sessions.each do |session| %>
+        <div id="<%= dom_id session %>">
+          <p>
+            <strong>User Agent:</strong>
+            <%= session.user_agent %>
+          </p>
 
+          <p>
+            <strong>Ip Address:</strong>
+            <%= session.ip_address %>
+          </p>
+
+          <p>
+            <strong>Created at:</strong>
+            <%= session.created_at %>
+          </p>
+        </div>
+        <p>
+          <%= button_to "Log out", session, method: :delete %>
+        </p>
+      <% end %>
     </div>
-    <p>
-      <%= button_to "Log out", session, method: :delete %>
-    </p>
-  <% end %>
+
+    <br>
+
+    <div>
+      <%= link_to "Back", root_path %>
+    </div>
+  </div>
 </div>
-
-<br>
-
-<div>
-  <%= link_to "Back", root_path %>
-</div>
-
-</app-section>
