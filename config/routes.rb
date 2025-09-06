@@ -14,6 +14,18 @@ Rails.application.routes.draw do
     resource :two_factor_configuration, only: [:new, :create, :destroy]
     resource :two_factor_challenge,     only: [:new, :create]
     resources :backup_codes,            only: [:index, :create]
+
+    # WebAuthn registration for hardware keys (authenticated user)
+    namespace :webauthn do
+      post "registration/options", to: "registrations#options"
+      post "registration", to: "registrations#create"
+    end
+  end
+
+  # WebAuthn authentication (passwordless)
+  namespace :webauthn do
+    post "authentication/options", to: "authentications#options"
+    post "authentication", to: "authentications#create"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

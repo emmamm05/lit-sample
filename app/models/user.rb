@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :webauthn_credentials, dependent: :destroy
+
   generates_token_for :email_verification, expires_in: 2.days do
     email
   end
@@ -68,5 +70,11 @@ class User < ApplicationRecord
     current.delete_at(index)
     update!(otp_backup_codes: current.to_json)
     true
+  end
+  # WebAuthn user handle; generate if missing
+  def ensure_webauthn_id!
+    return webauthn_id if webauthn_id.present?
+    update!(webauthn_id: WebAuthn.respond_to?(:generate_user_id) ? WebAuthn.generate_user_id : SecureRandom.hex(32))
+    webauthn_id
   end
 end

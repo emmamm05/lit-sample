@@ -21,6 +21,8 @@ gem "jbuilder"
 gem "bcrypt", "~> 3.1.20"
 
 gem "authentication-zero"
+# Hardware security keys / Passkeys (WebAuthn)
+gem "webauthn", "~> 3.0"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
