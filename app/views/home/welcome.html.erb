@@ -7,25 +7,6 @@
     max-width: 1000px;
     margin: 0 auto;
   }
-  .sidebar {
-    position: sticky;
-    top: 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 1rem;
-    background: #f8fafc;
-  }
-  .sidebar h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1rem;
-  }
-  .sidebar nav a {
-    display: block;
-    color: #1f2937;
-    text-decoration: none;
-    padding: 0.25rem 0;
-  }
-  .sidebar nav a:hover { text-decoration: underline; }
   .welcome {
     border: 1px solid #e5e7eb;
     border-radius: 8px;
@@ -36,13 +17,7 @@
 </style>
 
 <div class="home-layout">
-  <aside class="sidebar" aria-label="Sidebar">
-    <h3>Navigation</h3>
-    <nav>
-      <a href="/profile">Profile</a>
-      <a href="/sessions">Sessions</a>
-    </nav>
-  </aside>
+  <app-sidebar></app-sidebar>
 
   <div class="welcome">
     <h1>Welcome to Lit Sample</h1>

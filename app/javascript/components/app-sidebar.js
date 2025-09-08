@@ -41,13 +41,11 @@ export class AppSidebar extends LitElement {
     return html`
       <aside aria-label="Sidebar">
         <h3>${this.heading}</h3>
-        <nav>
-          <a href="/profile">Profile</a>
-          <a href="/sign_in">Sign in</a>
-          <a href="/sign_up">Create account</a>
-          <a href="/sessions">Sessions</a>
-          <slot name="extra-links"></slot>
-        </nav>
+          <nav>
+            <a href="/profile">Profile</a>
+            <a href="/sessions">Sessions</a>
+            <slot></slot>
+          </nav>
       </aside>
     `;
   }
