@@ -10,6 +10,11 @@
   <p>You don't have backup codes yet. Generate a new set now.</p>
 <% end %>
 <%= button_to "Generate new backup codes", identity_backup_codes_path, method: :post, data: { turbo: false } %>
+
+<div>
+  <%= link_to "Back", profile_path %>
+</div>
+
 </app-section>
   </div>
 </div>
