@@ -1,6 +1,10 @@
 import { LitElement, html, css } from "lit";
 
 export class TwoFactorEnabled extends LitElement {
+  createRenderRoot() {
+    return this;
+  }
+
   static styles = css`
     :host {
       display: block;
@@ -47,15 +51,15 @@ export class TwoFactorEnabled extends LitElement {
   }
 
   getCodesText() {
-    const container = this.shadowRoot.querySelector('#backup-codes');
+    const container = this.querySelector('#backup-codes');
     if (!container) return '';
     const items = Array.from(container.querySelectorAll('li'));
     return items.map(li => li.textContent.trim()).join('\n');
   }
 
   addEventListeners() {
-    const copyBtn = this.shadowRoot.querySelector('#copy-codes');
-    const downloadBtn = this.shadowRoot.querySelector('#download-codes');
+    const copyBtn = this.querySelector('#copy-codes');
+    const downloadBtn = this.querySelector('#download-codes');
 
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {

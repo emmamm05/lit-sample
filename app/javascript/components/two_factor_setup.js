@@ -1,6 +1,10 @@
 import { LitElement, html, css } from "lit";
 
 export class TwoFactorSetup extends LitElement {
+  createRenderRoot() {
+    return this;
+  }
+
   static styles = css`
     :host {
       display: block;
