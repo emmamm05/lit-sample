@@ -18,6 +18,7 @@ class Identity::TwoFactorConfigurationsController < ApplicationController
     if ROTP::TOTP.new(@user.otp_secret, issuer: Rails.application.class.module_parent_name).verify(code, drift_ahead: 30, drift_behind: 30)
       @user.update!(otp_enabled_at: Time.current)
       @codes = @user.generate_backup_codes!
+      flash[:notice] = "Two-factor authentication enabled successfully!"
       render :enabled
     else
       flash.now[:alert] = "Invalid code"

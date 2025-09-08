@@ -1,6 +1,7 @@
 <div class="home-layout">
   <app-sidebar></app-sidebar>
   <div class="welcome">
+    <p style="color: green"><%= notice %></p>
     <two-factor-enabled>
       <ul>
         <% @codes.each do |code| %>
