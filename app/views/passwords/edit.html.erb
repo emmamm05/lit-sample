@@ -1,51 +1,50 @@
 <div class="home-layout">
   <app-sidebar></app-sidebar>
   <div class="welcome">
-<app-section>
-<p style="color: red"><%= alert %></p>
+    <password-form>
+      <p style="color: red"><%= alert %></p>
 
-<h1>Change your password</h1>
+      <h1>Change your password</h1>
 
-<%= form_with(url: password_path, method: :patch) do |form| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <%= form_with(url: password_path, method: :patch) do |form| %>
+        <% if @user.errors.any? %>
+          <div style="color: red">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+            <ul>
+              <% @user.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div>
-    <%= form.label :password_challenge, style: "display: block" %>
-    <%= form.password_field :password_challenge, required: true, autofocus: true, autocomplete: "current-password" %>
-  </div>
+        <div>
+          <%= form.label :password_challenge, style: "display: block" %>
+          <%= form.password_field :password_challenge, required: true, autofocus: true, autocomplete: "current-password" %>
+        </div>
 
-  <div>
-    <%= form.label :password, "New password", style: "display: block" %>
-    <%= form.password_field :password, required: true, autocomplete: "new-password" %>
-    <div>12 characters minimum.</div>
-  </div>
+        <div>
+          <%= form.label :password, "New password", style: "display: block" %>
+          <%= form.password_field :password, required: true, autocomplete: "new-password" %>
+          <div>12 characters minimum.</div>
+        </div>
 
-  <div>
-    <%= form.label :password_confirmation, "Confirm new password", style: "display: block" %>
-    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
-  </div>
+        <div>
+          <%= form.label :password_confirmation, "Confirm new password", style: "display: block" %>
+          <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
+        </div>
 
-  <div>
-    <%= form.submit "Save changes" %>
-  </div>
-<% end %>
+        <div>
+          <%= form.submit "Save changes" %>
+        </div>
+      <% end %>
 
-<br>
+      <br>
 
-<div>
-  <%= link_to "Back", profile_path %>
-</div>
-
-</app-section>
+      <div>
+        <%= link_to "Back", profile_path %>
+      </div>
+    </password-form>
   </div>
 </div>
