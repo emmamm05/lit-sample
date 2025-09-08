@@ -40,12 +40,11 @@ export class AppSidebar extends LitElement {
   render() {
     return html`
       <aside aria-label="Sidebar">
-        <h3>${this.heading}</h3>
-          <nav>
-            <a href="/profile">Profile</a>
-            <a href="/sessions">Sessions</a>
-            <slot></slot>
-          </nav>
+        <nav>
+          <a href="/profile">Profile</a>
+          <a href="/sessions">Sessions</a>
+          <slot></slot>
+        </nav>
       </aside>
     `;
   }

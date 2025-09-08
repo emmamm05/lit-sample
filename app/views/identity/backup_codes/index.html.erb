@@ -1,3 +1,23 @@
+<style>
+  .home-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1rem;
+    align-items: start;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .welcome {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #fafafa;
+  }
+  .welcome h1 { margin-top: 0; }
+</style>
+<div class="home-layout">
+  <app-sidebar></app-sidebar>
+  <div class="welcome">
 <app-section>
 <h1>Backup codes</h1>
 <% if Current.user.otp_backup_codes.present? %>
@@ -7,3 +27,6 @@
   <p>You don't have backup codes yet. Generate a new set now.</p>
 <% end %>
 <%= button_to "Generate new backup codes", identity_backup_codes_path, method: :post, data: { turbo: false } %>
+</app-section>
+  </div>
+</div>
