@@ -38,11 +38,13 @@ export class AppSidebar extends LitElement {
   }
 
   render() {
+    const isProfileActive = window.location.pathname === '/profile';
+    const isSessionsActive = window.location.pathname === '/sessions';
     return html`
       <aside aria-label="Sidebar">
         <nav>
-          <a href="/profile">Profile</a>
-          <a href="/sessions">Sessions</a>
+          <a href="/profile" class="${isProfileActive ? 'active' : ''}">Profile</a>
+          <a href="/sessions" class="${isSessionsActive ? 'active' : ''}">Sessions</a>
           <slot></slot>
         </nav>
       </aside>
