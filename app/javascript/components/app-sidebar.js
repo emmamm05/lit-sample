@@ -30,6 +30,12 @@ export class AppSidebar extends LitElement {
     nav a:hover {
       text-decoration: underline;
     }
+    nav a.active {
+      font-weight: bold;
+      background-color: #e5e7eb;
+      padding: 0.25rem;
+      border-radius: 4px;
+    }
   `;
 
   constructor() {
