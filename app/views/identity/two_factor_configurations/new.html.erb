@@ -1,40 +1,37 @@
 <div class="home-layout">
   <app-sidebar></app-sidebar>
   <div class="welcome">
-<app-section>
-<h1>Enable two‑factor authentication</h1>
+    <two-factor-setup>
+      <% if Current.user.otp_enabled? %>
+        <p>Two-factor authentication is already enabled.</p>
+        <%= button_to "Disable two-factor authentication", identity_two_factor_configuration_path, method: :delete %>
+      <% else %>
+        <p>Scan this QR in your authenticator app (Google Authenticator, 1Password, Authy, etc.) or enter the secret manually, then submit a code to confirm.</p>
 
-<% if Current.user.otp_enabled? %>
-  <p>Two‑factor authentication is already enabled.</p>
-  <%= button_to "Disable two‑factor authentication", identity_two_factor_configuration_path, method: :delete %>
-<% else %>
-  <p>Scan this QR in your authenticator app (Google Authenticator, 1Password, Authy, etc.) or enter the secret manually, then submit a code to confirm.</p>
+        <%# QR Code %>
+        <% if defined?(RQRCode) && @provisioning_uri.present? %>
+          <% qrcode = RQRCode::QRCode.new(@provisioning_uri) %>
+          <div class="qr-code" aria-label="TOTP QR Code">
+            <%= raw qrcode.as_svg(module_size: 6, standalone: true) %>
+          </div>
+        <% end %>
 
-  <%# QR Code %>
-  <% if defined?(RQRCode) && @provisioning_uri.present? %>
-    <% qrcode = RQRCode::QRCode.new(@provisioning_uri) %>
-    <div aria-label="TOTP QR Code">
-      <%= raw qrcode.as_svg(module_size: 6, standalone: true) %>
-    </div>
-  <% end %>
+        <p><strong>Secret:</strong> <code><%= Current.user.otp_secret %></code></p>
 
-  <p><strong>Secret:</strong> <code><%= Current.user.otp_secret %></code></p>
+        <%= form_with url: identity_two_factor_configuration_path do |f| %>
+          <div>
+            <%= f.label :code, "Authentication code" %><br>
+            <%= f.text_field :code, autocomplete: "one-time-code" %>
+          </div>
+          <div>
+            <%= f.submit "Enable" %>
+          </div>
+        <% end %>
+      <% end %>
 
-  <%= form_with url: identity_two_factor_configuration_path do |f| %>
-    <div>
-      <%= f.label :code, "Authentication code" %><br>
-      <%= f.text_field :code, autocomplete: "one-time-code" %>
-    </div>
-    <div>
-      <%= f.submit "Enable" %>
-    </div>
-  <% end %>
-<% end %>
-
-<div>
-  <%= link_to "Back", profile_path %>
-</div>
-
-</app-section>
+      <div>
+        <%= link_to "Back", profile_path %>
+      </div>
+    </two-factor-setup>
   </div>
 </div>
