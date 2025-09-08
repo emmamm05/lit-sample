@@ -6,7 +6,7 @@
 
     <p style="color: green"><%= notice %></p>
 
-    <div id="sessions">
+    <session-list>
       <% @sessions.each do |session| %>
         <div id="<%= dom_id session %>">
           <p>
@@ -28,7 +28,7 @@
           <%= button_to "Log out", session, method: :delete %>
         </p>
       <% end %>
-    </div>
+    </session-list>
 
     <br>
 
