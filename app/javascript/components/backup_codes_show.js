@@ -127,5 +127,5 @@ export class BackupCodesShow extends LitElement {
 }
 
 if (!customElements.get("backup-codes-show")) {
-  customElements.define("backup-codes-show", BackupCodesDisplay);
+  customElements.define("backup-codes-show", BackupCodesShow);
 }

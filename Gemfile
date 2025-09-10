@@ -58,6 +58,10 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  # Ruby LSP for IDE support
+  gem "ruby-lsp", require: false
+  # Solargraph language server for Ruby
+  gem "solargraph", require: false
 end
 
 # TOTP for two-factor authentication
